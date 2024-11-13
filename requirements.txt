@@ -1,0 +1,6 @@
+Django>=3.2,<4.0
+pillow>=8.2.0  # Required for handling images (profile pictures)
+pytz>=2021.1
+sqlparse>=0.4.1
+asgiref>=3.3.4
+gunicorn>=20.1.0

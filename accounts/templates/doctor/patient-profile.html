@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from tabib-v2.inaikas.com/doctor-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:33 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDSUU-BAY | Patient Profile</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/main/css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="main-wrapper" class="show">
+
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="assets/images/download.png" alt=""></a>
+                <a href="#"><img class="brand-title" src="assets/images/logo.png" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+        <!-- start section sidebar -->
+        <aside class="left-panel nicescroll-box">
+            <nav class="navigation">
+                <ul class="list-unstyled main-menu">
+                    <li class="has-submenu active">
+                        <a href="{% url 'homedoc' %}">
+                            <i class="fas fa-th-large"></i>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-user-md"></i>
+                            <span class="nav-label">Workers</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctors' %}">All Workers</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Patients</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allpatients' %}">All Patients</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-book-medical"></i>
+                            <span class="nav-label">Prescriptions</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allprescription' %}">All Prescriptions</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-label">Settings</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctorsettings' %}">Account Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End section sidebar -->
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section header -->
+        <div class="header">
+            <header class="top-head container-fluid">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                    <div class="left-header content-header__menu">
+                        <ul class="list-unstyled">
+                            <!-- <li class="nav-link btn">
+                                <a href="new-prescription.html"><i class="far fa-file-alt"></i> <span> Write a prescription</span></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="my-account-wrapper widget-7">
+                        <div class="account-wrapper">
+                            <div class="account-control">
+                                <a class="login header-profile" href="#" title="Sign in">
+                                    <div class="header-info">
+                                        <span style="text-transform: capitalize;">{{ user.get_full_name }}</span>   
+                                        <small>{{ user.userprofile.get_role_display }}</small> <!-- Assuming you have a role field in UserProfile model -->
+                                    </div>
+                                    <img src="{% if user.userprofile.profile_picture %}{{ user.userprofile.profile_picture.url }}{% else %}{% static 'assets/images/profile.jpg' %}{% endif %}" alt="Profile Picture">
+                                </a>
+                                <div class="account-dropdown-form dropdown-container">
+                                    <div class="form-content">
+                                        <a href="{% url 'doctorsettings' %}">
+                                            <i class="far fa-user"></i>
+                                            <span class="ml-2">Profile</span>
+                                        </a>
+                                        <a href="{% url 'doctorinbox' %}">
+                                            <i class="far fa-envelope"></i>
+                                            <span class="ml-2">Inbox</span>
+                                        </a>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="ml-2">Logout </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- End section header -->
+
+
+        <!-- start section content -->
+        <div class="content-body">
+            <div class="warper container-fluid">
+                <div class="main_container">
+
+
+                    <div class="row page-titles mx-0">
+                        <div class="col-sm-6 p-md-0">
+                            <div class="welcome-text">
+                                <h4 class="text-primary">Patient Profile & Medical History</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'homedoc' %}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="#">Patient Profile</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between doctor-info-details">
+                                        <div class="d-flex left-content">
+                                            <div class="media align-self-start">
+                                                {% if patient.image %}
+                                                    <img alt="image" src="{{ patient.image.url }}" class="img-fluid rounded-circle" width="60">
+                                                    {% else %}
+                                                    <img alt="image" src="{% static 'assets/images/profile.jpg' %}" class="img-fluid rounded-circle" width="60">
+                                                {% endif %}
+                                                <div class="pulse-css"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h2 class="mb-2">{{ patient.first_name }} {{ patient.last_name }}</h2>
+                                                <p style="text-transform: uppercase;" class="mb-md-2 mb-sm-4 mb-2">{{ patient.matriculation_number }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="doctor-info-content">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item col-md-4" role="presentation">
+                                        <button class="nav-link  active" id="home-tab" data-bs-toggle="tab"
+                                            data-bs-target="#home" type="button" role="tab" aria-controls="home"
+                                            aria-selected="true">
+                                            <span style="text-transform: capitalize;">{{ patient.first_name }} {{ patient.last_name }}</span> Information
+                                        </button>
+                                    </li>
+                                    <li class="nav-item col-md-4" role="presentation">
+                                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                            data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
+                                            aria-selected="false">
+                                            Medical History
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="card m-t-30">
+                                            <div class="row m-t-30 m-l-0 m-r-0">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">Personal Details</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="basic-form">
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label for="fname">First Name:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="First Name" style="text-transform: capitalize;" value="{{ patient.first_name }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="lname">Last Name:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Last Name" style="text-transform: capitalize;" value="{{ patient.last_name }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="email">Email Address:</label>
+                                                                            <input type="email" class="form-control"
+                                                                                placeholder="Email" value="{{ patient.email }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fname">Mobile Number:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Mobile No." value="{{ patient.mobile_no }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fname">MatNo:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="MatNo."  style="text-transform: uppercase;" value="{{ patient.matriculation_number }}" readonly>
+                                                                        </div>
+                                                                        <!-- <div class="form-group">
+                                                                            <label for="fname">Department:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Department" style="text-transform: capitalize;" readonly>
+                                                                        </div> -->
+                                                                        <div class="form-group">
+                                                                            <label for="fname">Sex:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Female." style="text-transform: capitalize;" value="{{ patient.sex }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fname">Genotype:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Genotype." value="{{ patient.genotype}}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fname">Blood Group:</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Blood Group" value="{{ patient.blood_group }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fname">Height</label>
+                                                                            <input type="mno" class="form-control"
+                                                                                placeholder="Height" value="{{ patient.patient_height }}" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title">Guardian's Details</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="basic-form">
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <!-- <div class="form-group">
+                                                                            <label for="fname">Father's Name:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Father's Name" style="text-transform: capitalize;" readonly>
+                                                                        </div> -->
+                                                                        <!-- <div class="form-group">
+                                                                            <label for="lname">Mother's Name:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Mother's Name" style="text-transform: capitalize;" readonly>
+                                                                        </div> -->
+                                                                        <div class="form-group">
+                                                                            <label for="mno">Mother's Phone Number:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Mother's Number" value="{{ patient.mothers_number }}" readonly>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="fno">Father's Mobile Number:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Father's Number" value="{{ patient.fathers_number }}" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel"
+                                        aria-labelledby="profile-tab">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="example1" class="display nowrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Doctor Appointed</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for history in medical_history %}
+                                                        <tr>
+                                                            <td>{{ history.date }}</td>
+                                                            <td style="text-transform: capitalize;">Dr, {{ history.doctor }}</td>                                                            <td>
+                                                                <a href="{% url 'view_medical_history' history.id %}" class='mr-4'>
+                                                                    <span class='fa fa-eye tbl-eye' aria-hidden='true' title="See Medical History"></span>
+                                                                </a>
+                                                                <!-- <a class='mr-4'>
+                                                                    <span class='fas fa-print tbl-print'></span>
+                                                                </a> -->
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End section content -->
+
+
+    <!-- start section footer -->
+    <div class="footer ">
+        <div class="copyright ">
+            <p class="mb-0">Copyright © Designed &amp; Developed by <a href="#" target="_blank">Paul Erhuvwu</a> 2022
+            </p>
+        </div>
+    </div>
+    <!-- End section footer -->
+
+
+    <!-- JQuery v3.5.1 -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Moment -->
+    <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+
+    <!-- Date Range Picker -->
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
+    <!-- Main Custom JQuery -->
+    <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+    <!-- Tabeles -->
+    <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/js/init-tdatatable.js' %}"></script>
+    <!-- Chart js -->
+    <script src="{% static 'assets/plugins/chart/chart/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/js/charts-custom.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+
+
+</body>
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/doctor-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:35 GMT -->
+</html>

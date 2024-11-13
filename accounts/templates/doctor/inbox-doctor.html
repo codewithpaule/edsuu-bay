@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:44:27 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tabib Apps web | Admin Dashboard Template">
+    <title>EDSUU-BAY | Inbox</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/main/css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="main-wrapper" class="show">
+
+
+        <!-- start section sidebar -->
+        <aside class="left-panel nicescroll-box">
+            <nav class="navigation">
+                <ul class="list-unstyled main-menu">
+                    <li class="has-submenu active">
+                        <a href="{% url 'homedoc' %}">
+                            <i class="fas fa-th-large"></i>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-user-md"></i>
+                            <span class="nav-label">Workers</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctors' %}">All Workers</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Patients</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allpatients' %}">All Patients</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-book-medical"></i>
+                            <span class="nav-label">Prescriptions</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allprescription' %}">All Prescriptions</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-heartbeat"></i>
+                            <span class="nav-label">Tests</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="all-tests.html">All Tests</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-label">Settings</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctorsettings' %}">Account Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End section sidebar -->
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section header -->
+        <div class="header">
+            <header class="top-head container-fluid">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                    <div class="left-header content-header__menu">
+                        <ul class="list-unstyled">
+                            <!-- <li class="nav-link btn">
+                                <a href="new-prescription.html"><i class="far fa-file-alt"></i> <span> Write a prescription</span></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="my-account-wrapper widget-7">
+                        <div class="account-wrapper">
+                            <div class="account-control">
+                                <a class="login header-profile" href="#" title="Sign in">
+                                    <div class="header-info">
+                                        <span style="text-transform: capitalize;">{{ user.get_full_name }}</span>   
+                                        <small>{{ user.userprofile.get_role_display }}</small> <!-- Assuming you have a role field in UserProfile model -->
+                                    </div>
+                                    <img src="{% if user.userprofile.profile_picture %}{{ user.userprofile.profile_picture.url }}{% else %}{% static 'assets/images/profile.jpg' %}{% endif %}" alt="Profile Picture">
+                                </a>
+                                <div class="account-dropdown-form dropdown-container">
+                                    <div class="form-content">
+                                        <a href="{% url 'doctorsettings' %}">
+                                            <i class="far fa-user"></i>
+                                            <span class="ml-2">Profile</span>
+                                        </a>
+                                        <a href="{% url 'doctorinbox' %}">
+                                            <i class="far fa-envelope"></i>
+                                            <span class="ml-2">Inbox</span>
+                                        </a>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="ml-2">Logout </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- End section header -->
+
+
+        <!-- start section content -->
+        <div class="content-body">
+            <div class="warper container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-lg-12 p-md-0">
+                        <h4 class="text-primary">Welcome, <span class="names">{{ user.userprofile.get_role_display }} <span style="text-transform: capitalize;">{{ user.get_full_name }}</span></span></h4>
+                    </div>
+                </div>
+                <div class="new-patients main_container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h4 class="card-title">Inboxes</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example1" class="display nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Date</th>
+                                                    <th>Sender</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for message in messages_received %}
+                                                <tr>
+                                                    <td>{{ message.timestamp|time:"H:i" }}</td>
+                                                    <td>{{ message.timestamp|date:"d M Y" }}</td>
+                                                    <td style="text-transform: capitalize;">{{ message.sender.user.first_name }} {{ message.sender.user.last_name }}</td>
+                                                    <td>{{ message.sender.mobile_number }}</td>
+                                                    <td class="text-start">
+                                                        {% if message.read %}
+                                                            <span class="badge badge-primary" style="background-color: #62b16e;">Read</span>
+                                                        {% else %}
+                                                            <span class="badge badge-secondary" style="background-color: #d9534f;">Un-read</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'viewmessage' message.id %}" class="mr-4 vue">
+                                                            <span class="fa fa-eye tbl-eye" aria-hidden="true"></span>
+                                                        </a>
+                                                        <a href="javascript:void()" class="delet">
+                                                            <span class="fas fa-trash-alt tbl-delet"></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End section content -->
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Message Details</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label>Date:</label>
+                                <p id="message-date" class="form-control-plaintext"></p>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label>Sender:</label>
+                                <p id="message-sender" class="form-control-plaintext"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label>Phone Number:</label>
+                                <p id="message-phone" class="form-control-plaintext"></p>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label>Message:</label>
+                                <p id="message-content" class="form-control-plaintext"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- End of Modal -->
+
+        <!-- start section footer -->
+        <div class="footer">
+            <div class="copyright">
+                <p class="mb-0">Copyright © Designed &amp; Developed by <a href="#" target="_blank">Paul Erhuvwu</a>
+                    2024
+                </p>
+            </div>
+        </div>
+        <!-- End section footer -->
+
+        
+    </div>
+    
+    <!-- JQuery v3.5.1 -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Moment -->
+    <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+
+    <!-- Date Range Picker -->
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
+    <!-- Main Custom JQuery -->
+    <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+    <!-- Tabeles -->
+    <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/js/init-tdatatable.js' %}"></script>
+    <!-- Chart js -->
+    <script src="{% static 'assets/plugins/chart/chart/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/js/charts-custom.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+
+</body>
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:17 GMT -->
+</html>

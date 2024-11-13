@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/all-patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:35 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDSUU-BAY | Patients</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/main/css/style.css' %}">
+</head>
+
+<body>
+    <div id="main-wrapper" class="show">
+
+        
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="assets/images/download.png" alt=""></a>
+                <a href="#"><img class="brand-title" src="assets/images/logo.png" alt=""></a>
+
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section sidebar -->
+        <aside class="left-panel nicescroll-box">
+            <nav class="navigation">
+                <ul class="list-unstyled main-menu">
+                    <li class="has-submenu active">
+                        <a href="{% url 'homedoc' %}">
+                            <i class="fas fa-th-large"></i>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-user-md"></i>
+                            <span class="nav-label">Workers</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctors' %}">All Workers</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Patients</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allpatients' %}">All Patients</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="has-submenu">
+                        <a href="new-appointment.html">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span class="nav-label">Appointment</span>
+                        </a>
+                    </li> -->
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-book-medical"></i>
+                            <span class="nav-label">Prescriptions</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allprescription' %}">All Prescriptions</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-label">Settings</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctorsettings' %}">Account Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End section sidebar -->
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section header -->
+        <div class="header">
+            <header class="top-head container-fluid">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                    <div class="left-header content-header__menu">
+                        <ul class="list-unstyled">
+                            <!-- <li class="nav-link btn">
+                                <a href="new-prescription.html"><i class="far fa-file-alt"></i> <span> Write a prescription</span></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="my-account-wrapper widget-7">
+                        <div class="account-wrapper">
+                            <div class="account-control">
+                                <a class="login header-profile" href="#" title="Sign in">
+                                    <div class="header-info">
+                                        <span style="text-transform: capitalize;">{{ user.get_full_name }}</span>   
+                                        <small>{{ user.userprofile.get_role_display }}</small> <!-- Assuming you have a role field in UserProfile model -->
+                                    </div>
+                                    <img src="{% if user.userprofile.profile_picture %}{{ user.userprofile.profile_picture.url }}{% else %}{% static 'assets/images/profile.jpg' %}{% endif %}" alt="Profile Picture">
+                                </a>
+                                <div class="account-dropdown-form dropdown-container">
+                                    <div class="form-content">
+                                        <a href="{% url 'doctorsettings' %}">
+                                            <i class="far fa-user"></i>
+                                            <span class="ml-2">Profile</span>
+                                        </a>
+                                        <a href="{% url 'doctorinbox' %}">
+                                            <i class="far fa-envelope"></i>
+                                            <span class="ml-2">Inbox</span>
+                                        </a>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="ml-2">Logout </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- End section header -->
+
+
+        <!-- start section content -->
+        <div class="content-body">
+            <div class="warper container-fluid">
+                <div class="all-patients main_container">
+                    <div class="row page-titles mx-0">
+                        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'homedoc' %}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="#">Patients</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header fix-card">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h4 class="card-title"> All Patients </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example1" class="display nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>MatNo</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Phone No</th>
+                                                    <th>E-mail</th>
+                                                    <th>Sex</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if patients %}
+                                                    {% for patient in patients %}
+                                                    <tr>
+                                                        <td style="text-transform: uppercase;">
+                                                            {{ patient.matriculation_number }}
+                                                        </td>
+                                                        <td style="text-transform: capitalize;">{{ patient.first_name }} {{ patient.last_name }}</td>
+                                                        <td> {{ patient.mobile_no }} </td>
+                                                        <td> {{ patient.email }}</td>
+                                                        <td>{{ patient.sex }}</td>
+                                                        <td>
+                                                            <a href="{% url 'patientprofile' patient.id %}" class='mr-4 check'> <span
+                                                                    class='fas fa-eye'></span></a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <p>No Patients yet.
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End section content -->
+
+        <!-- Modal -->
+        <div class="modal fade selectRefresh" id="newAppointment" tabindex="-1" aria-labelledby="exampleModalLabelOne">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne"> New appointment </h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row align-items-start">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <input class="form-control" type="text" value="06/17/2022">
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <select class="form-control form-select">
+                                    <option> 07:00 - 07:30</option>
+                                    <option> 07:30 - 08:00</option>
+                                    <option> 08:00 - 08:30</option>
+                                    <option> 08:30 - 09:00</option>
+                                    <option> 09:00 - 09:30</option>
+                                    <option> 09:30 - 10:00</option>
+                                    <option> 10:00 - 10:30</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <select class="form-control form-select">
+                                    <option>Select Patient...</option>
+                                    <option>Airi Satou</option>
+                                    <option>Angelica Ramos</option>
+                                    <option>Ashton Cox</option>
+                                    <option>Bradley Greer</option>
+                                    <option>Brenden</option>
+                                    <option>Ashton Cox</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Motif Patient</label>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn badge-primary">Post To Pharmacist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal -->
+
+
+        <!-- start section footer -->
+        <div class="footer">
+            <div class="copyright">
+                <p class="mb-0">Copyright © Designed &amp; Developed by <a href="#" target="_blank">Paul Erhuvwu</a>
+                    2024
+                </p>
+            </div>
+        </div>
+        <!-- End section footer -->
+
+
+    </div>
+
+
+
+    <!-- JQuery v3.5.1 -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Moment -->
+    <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+
+    <!-- Date Range Picker -->
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
+    <!-- Main Custom JQuery -->
+    <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+    <!-- Tabeles -->
+    <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/js/init-tdatatable.js' %}"></script>
+    <!-- Chart js -->
+    <script src="{% static 'assets/plugins/chart/chart/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/js/charts-custom.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+
+</body>
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/all-patients.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:45 GMT -->
+</html>

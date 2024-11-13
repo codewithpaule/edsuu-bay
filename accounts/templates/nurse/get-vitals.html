@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDSUU-BAY | Get Patient Vital Signs</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/main/css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="main-wrapper" class="show">
+
+
+        <!-- start section sidebar -->
+        <aside class="left-panel nicescroll-box">
+            <nav class="navigation">
+                <ul class="list-unstyled main-menu">
+                    <li class="has-submenu active">
+                        <a href="{% url 'homenurse' %}">
+                            <i class="fas fa-th-large"></i>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Workers</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'workers' %}">All Workers</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Treatment</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'treatment' %}">Give Treatment</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Patients</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'all_patient_nurse' %}">All Patients</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-label">Settings</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'nurse_settings' %}">Nurse Settings</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fa fa-tag"></i>
+                            <span class="nav-label">Authentication</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="page-login.html">Login simple</a></li>
+                            <li><a href="page-register.html">Register simple</a></li>
+                            <li><a href="page-forgot-password.html">Page forgot password</a></li>
+                            <li><a href="page-error-404.html">Error 404</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </nav>
+        </aside>
+        <!-- End section sidebar -->
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section header -->
+        <div class="header">
+            <header class="top-head container-fluid">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                    <div class="left-header content-header__menu">
+                        <ul class="list-unstyled">
+                            <li class="nav-link btn">
+                                <a href="{% url 'vitals' %}"><i class="far fa-calendar-check"></i> <span>Get Patient Vital Signs</span> </a>
+                            </li>
+                            <!-- <li class="nav-link btn">
+                                <a href="new-prescription.html"><i class="far fa-file-alt"></i> <span> Write a prescription</span></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="my-account-wrapper widget-7">
+                        <div class="account-wrapper">
+                            <div class="account-control">
+                                <a class="login header-profile" href="#" title="Sign in">
+                                    <div class="header-info">
+                                        <span style="text-transform: capitalize;">{{ user.get_full_name }}</span>   
+                                        <small>{{ user.userprofile.get_role_display }}</small> <!-- Assuming you have a role field in UserProfile model -->
+                                    </div>
+                                    <img src="{% if user.userprofile.profile_picture %}{{ user.userprofile.profile_picture.url }}{% else %}{% static 'assets/images/profile.jpg' %}{% endif %}" alt="Profile Picture">
+                                </a>
+                                <div class="account-dropdown-form dropdown-container">
+                                    <div class="form-content">
+                                        <a href="{% url 'nurse_settings' %}">
+                                            <i class="far fa-user"></i>
+                                            <span class="ml-2">Profile</span>
+                                        </a>
+                                        <a href="{% url 'nurse_inbox' %}">
+                                            <i class="far fa-envelope"></i>
+                                            <span class="ml-2">Inbox</span>
+                                        </a>
+                                        <a href="{% url 'login' %}">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="ml-2">Logout </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- End section header -->
+
+
+        <!-- start section content -->
+        <div class="content-body">
+            <div class="warper container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-lg-12 p-md-0">
+                        <h4 class="text-primary">Get Patient Vitals</h4>
+                    </div>
+                </div>
+                <div class="new-patients main_container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h4 class="card-title">Get Patient Vitals</h4>
+                                </div>
+                                <!-- Display success and error messages -->
+                                {% if messages %}
+                                <div class="messages">
+                                    {% for message in messages %}
+                                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                <div class="modal-body">
+                                    <form method="post" action="{% url 'post_to_doctor' %}" class="row align-items-start">
+                                        {% csrf_token %}
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="patient">Select Patient</label>
+                                            <select class="form-control form-select" name="patient" style="text-transform: capitalize;" required>
+                                                <option value="">.......</option>
+                                                {% for patient in patients %}
+                                                <option value="{{ patient.id }}" style="text-transform: capitalize;">{{ patient.matriculation_number }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="weight">Weight</label>
+                                            <input class="form-control" type="text" name="weight" required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="bloodpress">Blood Pressure</label>
+                                            <input class="form-control" type="text" name="bloodpress" required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="temperature">Temperature</label>
+                                            <input class="form-control" type="text" name="temperature" required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="pulse">Pulse</label>
+                                            <input class="form-control" type="text" name="pulse" required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="doctor">Select Doctor</label>
+                                            <select class="form-control form-select" name="doctor" style="text-transform: capitalize;" required>
+                                                <option value="">.......</option>
+                                                {% for doctor in doctors %}
+                                                <option style="text-transform: capitalize;" value="{{ doctor.user.id }}">{{ doctor.user.first_name }} {{ doctor.user.last_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn badge-primary">Post To Doctor</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End section content -->
+
+        <!-- Modal -->
+        <div class="modal fade selectRefresh" id="newAppointment" tabindex="-1" aria-labelledby="exampleModalLabelOne">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne"> New Vital Signs </h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- End of Modal -->
+
+        <!-- start section footer -->
+        <div class="footer">
+            <div class="copyright">
+                <p class="mb-0">Copyright © Designed &amp; Developed by <a href="#" target="_blank">Paul Erhuvwu</a>
+                    2024
+                </p>
+            </div>
+        </div>
+        <!-- End section footer -->
+
+        
+    </div>
+    <!-- JQuery v3.5.1 -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Moment -->
+    <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+
+    <!-- Date Range Picker -->
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
+    <!-- Main Custom JQuery -->
+    <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+    <!-- Tabeles -->
+    <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/js/init-tdatatable.js' %}"></script>
+    <!-- Chart js -->
+    <script src="{% static 'assets/plugins/chart/chart/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/js/charts-custom.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' %}"></script>
+
+</body>
+
+
+</html>

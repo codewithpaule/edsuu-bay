@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/page-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:47:30 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDSUU-BAY | Register</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/favicon-32x32.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/main/css/style.css' %}">
+</head>
+
+<body class="auth">
+    <div id="main-wrapper" class="show">
+
+        <!-- Register page -->
+        <div class="login-tabib">
+            <div>
+                <div class="text-center">
+                    <a class="logo" href="#">
+                        <img class="img-fluid" src="{% static 'assets/images/logo.png' %}" alt="loogin page">
+                    </a>
+
+                </div>
+                <div class="login-main">
+                    {% if error %}
+                            <p class="text-danger">{{ error }}</p>
+                    {% endif %}
+                    <form class="theme-form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h4>Create your account</h4>
+                        <p>Enter your personal details to create account</p>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label pt-0">Register as a:</label>
+                            <div class="row g-2">
+                                <div class="col-md-12 col-lg-7">
+                                    <div class="form-group mb-0">
+                                        <select class="form-control form-select" name="role" required>
+                                            <option value="nurse">Nurse</option>
+                                            <option value="doctor">Doctor</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label pt-0">Username</label>
+                            <input class="form-control" type="text" name="username" placeholder="Username" required>
+                        </div>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label pt-0">Your Name</label>
+                            <div class="row g-2">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-group mb-0">
+                                        <input class="form-control" type="text" name="first_name" placeholder="First name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="form-group mb-0">
+                                        <input class="form-control" type="text" name="last_name" placeholder="Last name" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label">Email Address</label>
+                            <input class="form-control" type="email" name="email" placeholder="pauleruvwu@gmail.com" required>
+                        </div>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label">Phone Number</label>
+                            <input class="form-control" type="text" minlength="11" maxlength="11" name="phone_number" placeholder="+1234567890" required>
+                        </div>
+                    
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label">Password</label>
+                            <div class="form-input position-relative">
+                                <input class="form-control" type="password" name="password" placeholder="*********" required>
+                                <div class="show-hide"><span class="show"></span></div>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-10">
+                            <label class="col-form-label">Profile Picture</label>
+                            <input class="form-control" type="file" name="profile_picture" accept="image/*">
+                        </div>
+                        <div class="form-group mb-0">
+                            <!-- <div class="checkbox p-0">
+                                <input id="checkbox1" type="checkbox" required>
+                                <label class="text-muted" for="checkbox1">Agree with <a class="ms-2 text-primary" href="#">Privacy Policy</a></label>
+                            </div> -->
+                            <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                        </div>
+                    
+                        <p class="mt-4 mb-0">Already have an account?<a class="ms-2 text-primary" href="{% url 'login' %}">Sign in</a></p>
+                        
+                    </form>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <!-- End Register page -->
+
+    </div>
+
+    <!-- JQuery v3.5.1 -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- popper js -->
+    <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+
+    <!-- Moment -->
+    <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+
+    <!-- Date Range Picker -->
+    <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+
+    <!-- Main Custom JQuery -->
+    <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/option-themes.js' }"></script>
+
+</body>
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/page-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:47:30 GMT -->
+</html>

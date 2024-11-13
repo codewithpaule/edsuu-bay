@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from tabib-v2.inaikas.com/new-prescription.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:45 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDSUU-BAY | Interview</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/logo.png' %}">
+    <!-- Base Styling  -->
+    <link rel="stylesheet" href="{% static 'assets/main/css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/main/css/style.css' %}">
+</head>
+
+<body>
+    <div id="main-wrapper" class="show">
+
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section sidebar -->
+        <aside class="left-panel nicescroll-box">
+            <nav class="navigation">
+                <ul class="list-unstyled main-menu">
+                    <li class="has-submenu active">
+                        <a href="{% url 'homedoc' %}">
+                            <i class="fas fa-th-large"></i>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-user-md"></i>
+                            <span class="nav-label">Workers</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctors' %}">All Workers</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-label">Patients</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allpatients' %}">All Patients</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-book-medical"></i>
+                            <span class="nav-label">Prescriptions</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'allprescription' %}">All Prescriptions</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-heartbeat"></i>
+                            <span class="nav-label">Tests</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="all-tests.html">All Tests</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-label">Settings</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="{% url 'doctorsettings' %}">Account Settings</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu">
+                        <a href="javascript:void()" class="has-arrow mm-collapsed">
+                            <i class="fa fa-tag"></i>
+                            <span class="nav-label">Authentication</span>
+                        </a>
+                        <ul class="list-unstyled mm-collapse">
+                            <li><a href="page-login.html">Login simple</a></li>
+                            <li><a href="page-register.html">Register simple</a></li>
+                            <li><a href="page-forgot-password.html">Page forgot password</a></li>
+                            <li><a href="page-error-404.html">Error 404</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End section sidebar -->
+
+
+        <!-- start logo components -->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="#"> <img class="logo-tabib" src="{% static 'assets/images/download.png' %}" alt=""></a>
+                <a href="#"><img class="brand-title" src="{% static 'assets/images/logo.png' %}" alt=""></a>
+            </div>
+        </div>
+        <!-- End logo components -->
+
+
+        <!-- start section header -->
+        <div class="header">
+            <header class="top-head container-fluid">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="line"></span><span class="line"></span><span class="line"></span>
+                    </div>
+                    <div class="left-header content-header__menu">
+                        <ul class="list-unstyled">
+                            <!-- <li class="nav-link btn">
+                                <a href="new-prescription.html"><i class="far fa-file-alt"></i> <span> Write a prescription</span></a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="my-account-wrapper widget-7">
+                        <div class="account-wrapper">
+                            <div class="account-control">
+                                <a class="login header-profile" href="#" title="Sign in">
+                                    <div class="header-info">
+                                        <span style="text-transform: capitalize;">{{ user.get_full_name }}</span>   
+                                        <small>{{ user.userprofile.get_role_display }}</small> <!-- Assuming you have a role field in UserProfile model -->
+                                    </div>
+                                    <img src="{% if user.userprofile.profile_picture %}{{ user.userprofile.profile_picture.url }}{% else %}{% static 'assets/images/profile.jpg' %}{% endif %}" alt="Profile Picture">
+                                </a>
+                                <div class="account-dropdown-form dropdown-container">
+                                    <div class="form-content">
+                                        <a href="{% url 'doctorsettings' %}">
+                                            <i class="far fa-user"></i>
+                                            <span class="ml-2">Profile</span>
+                                        </a>
+                                        <a href="{% url 'doctorinbox' %}">
+                                            <i class="far fa-envelope"></i>
+                                            <span class="ml-2">Inbox</span>
+                                        </a>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            <span class="ml-2">Logout </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- End section header -->
+
+
+        <!-- start section content -->
+        <div class="content-body">
+            <div class="warper container-fluid">
+                <div class="new_prescription main_container">
+                    <div class="row page-titles mx-0">
+                        <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'homedoc' %}">Home</a></li>
+                                <li class="breadcrumb-item active"><a href="#">New Prescription</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <h4 class="card-title">Vital Signs for {{ patient.first_name }} {{ patient.last_name }}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form class="row align-items-start">
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="weight">Weight</label>
+                                            <input class="form-control" type="text" name="weight" value="{{ vital_sign.weight }} kg" readonly required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="bloodpress">Blood Pressure</label>
+                                            <input class="form-control" type="text" name="bloodpress" value="{{ vital_sign.blood_pressure }} mmHg" readonly required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="temperature">Temperature</label>
+                                            <input class="form-control" type="text" name="temperature" value="{{ vital_sign.temperature }} ⁰C" readonly required>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 form-group">
+                                            <label for="pulse">Pulse</label>
+                                            <input class="form-control" type="text" name="pulse" value="{{ vital_sign.pulse }} beat per mins" readonly required>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <h4 class="card-title">Prescription for {{ patient.first_name }} {{ patient.last_name }}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form id="prescriptionForm" method="post" action="#">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="symptoms">Symptoms:</label>
+                                            <textarea id="symptoms" name="symptoms" class="form-control" rows="4" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="diagnosis">Diagnosis:</label>
+                                            <textarea id="diagnosis" name="diagnosis" class="form-control" rows="4" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="treatment">Treatment:</label>
+                                            <textarea id="treatment" name="treatment" class="form-control" rows="4" required></textarea>
+                                        </div>
+                                        
+                                        <!-- Drugs List -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Drugs List</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="numDrugs">Number of Drugs:</label>
+                                                    <input type="number" required id="numDrugs" name="numDrugs" class="form-control" min="1" max="10" placeholder="Enter number of drugs..">
+                                                </div>
+                                                <div id="drugsContainer"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Tests List -->
+                                        <div class="card shadow mb-4">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Tests List</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="numTests">Number of Tests:</label>
+                                                    <input type="number" id="numTests" name="numTests" class="form-control" min="0" max="10" placeholder="Enter number of tests...">
+                                                </div>
+                                                <div id="testsContainer"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary float-end">Send for Treatment</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End section content -->
+
+        <!-- start section footer -->
+        <div class="footer">
+            <div class="copyright">
+                <p class="mb-0">Copyright © Designed &amp; Developed by <a href="#" target="_blank">Paul Erhuvwu</a>
+                    2024
+                </p>
+            </div>
+        </div>
+        <!-- End section footer -->
+
+
+    </div>
+
+
+     <!-- JQuery v3.5.1 -->
+     <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+
+     <!-- popper js -->
+     <script src="{% static 'assets/plugins/popper/popper.min.js' %}"></script>
+ 
+     <!-- Bootstrap -->
+     <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.js' %}"></script>
+ 
+     <!-- Moment -->
+     <script src="{% static 'assets/plugins/moment/moment.min.js' %}"></script>
+ 
+     <!-- Date Range Picker -->
+     <script src="{% static 'assets/plugins/daterangepicker/daterangepicker.min.js' %}"></script>
+ 
+     <!-- Main Custom JQuery -->
+     <script src="{% static 'assets/js/toggleFullScreen.js' %}"></script>
+     <script src="{% static 'assets/js/main.js' %}"></script>
+     <script src="{% static 'assets/js/option-themes.js' %}"></script>
+     <!-- Tabeles -->
+     <script src="{% static 'assets/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+     <script src="{% static 'assets/js/init-tdatatable.js' %}"></script>
+     <!-- Chart js -->
+     <script src="{% static 'assets/plugins/chart/chart/Chart.min.js' %}"></script>
+     <script src="{% static 'assets/js/charts-custom.js' %}"></script>
+     <script src="{% static 'assets/js/option-themes.js' %}"></script>
+ 
+     <script>
+        $(document).ready(function() {
+            $('#numDrugs').on('change', function() {
+                var numDrugs = $(this).val();
+                var drugsContainer = $('#drugsContainer');
+                drugsContainer.empty(); // Clear existing fields
+                for (var i = 1; i <= numDrugs; i++) {
+                    drugsContainer.append(`
+                        <div class="form-group">
+                            <label for="drug${i}">Drug ${i}:</label>
+                            <input type="text" id="drug${i}" name="drug${i}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dosage${i}">Dosage for drug ${i}:</label>
+                            <input type="text" id="dosage${i}" name="dosage${i}" class="form-control" required>
+                        </div>
+                    `);
+                }
+            });
+    
+            $('#numTests').on('change', function() {
+                var numTests = $(this).val();
+                var testsContainer = $('#testsContainer');
+                testsContainer.empty(); // Clear existing fields
+                for (var i = 1; i <= numTests; i++) {
+                    testsContainer.append(`
+                        <div class="form-group">
+                            <label for="test${i}">Test ${i}:</label>
+                            <input type="text" id="test${i}" name="test${i}" class="form-control" required>
+                        </div>
+                    `);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+
+<!-- Mirrored from tabib-v2.inaikas.com/new-prescription.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 May 2024 07:46:47 GMT -->
+</html>
